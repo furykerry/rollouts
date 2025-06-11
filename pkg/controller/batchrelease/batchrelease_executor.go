@@ -125,7 +125,7 @@ func (r *Executor) executeBatchReleasePlan(release *v1beta1.BatchRelease, newSta
 		}
 
 	case v1beta1.RolloutPhaseCompleted:
-		// this state indicates that the plan is executed/cancelled successfully, should do nothing in these states.
+		// this state indicates that the plan is executed/canceled successfully, should do nothing in these states.
 	}
 
 	return result, newStatus, err

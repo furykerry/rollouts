@@ -196,7 +196,7 @@ func TestGetWorkloadForRef(t *testing.T) {
 				rs := generateRS(*dep)
 				rs.Namespace = namespace
 				rs.Spec.Replicas = dep.Spec.Replicas
-				rs.Labels[apps.DefaultDeploymentUniqueLabelKey] = "c9dcf87d5"
+				rs.Labels[apps.DefaultDeploymentUniqueLabelKey] = "cd68dc9"
 				return dep, &rs, nil
 			},
 			expectWorkload: func() *Workload {
@@ -218,7 +218,7 @@ func TestGetWorkloadForRef(t *testing.T) {
 					},
 					Replicas:           10,
 					StableRevision:     "stable",
-					CanaryRevision:     "c9dcf87d5",
+					CanaryRevision:     "cd68dc9",
 					PodTemplateHash:    "",
 					RevisionLabelKey:   "pod-template-hash",
 					IsStatusConsistent: true,
@@ -243,7 +243,7 @@ func TestGetWorkloadForRef(t *testing.T) {
 				rs := generateRS(*dep)
 				rs.Namespace = namespace
 				rs.Spec.Replicas = dep.Spec.Replicas
-				rs.Labels[apps.DefaultDeploymentUniqueLabelKey] = "c9dcf87d5"
+				rs.Labels[apps.DefaultDeploymentUniqueLabelKey] = "cd68dc9"
 				return dep, &rs, nil
 			},
 			expectWorkload: func() *Workload {
@@ -258,8 +258,8 @@ func TestGetWorkloadForRef(t *testing.T) {
 					},
 					Replicas:             10,
 					StableRevision:       "stable",
-					CanaryRevision:       "c9dcf87d5",
-					PodTemplateHash:      "c9dcf87d5",
+					CanaryRevision:       "cd68dc9",
+					PodTemplateHash:      "cd68dc9",
 					RevisionLabelKey:     "pod-template-hash",
 					IsStatusConsistent:   true,
 					InRolloutProgressing: true,
@@ -300,7 +300,7 @@ func TestGetWorkloadForRef(t *testing.T) {
 					},
 					Replicas:             10,
 					StableRevision:       "stable",
-					CanaryRevision:       "c9dcf87d5",
+					CanaryRevision:       "cd68dc9",
 					PodTemplateHash:      "stable",
 					RevisionLabelKey:     "pod-template-hash",
 					IsStatusConsistent:   true,
@@ -356,7 +356,7 @@ func TestGetWorkloadForRef(t *testing.T) {
 			finder := NewControllerFinder(cli)
 			workload, err := finder.GetWorkloadForRef(rollout)
 			if !checkWorkloadEqual(workload, cs.expectWorkload()) {
-				t.Fatal("expected workload not equal got workload")
+				t.Fatalf("expected workload not equal got workload: \n expected: %v \n got: %v", DumpJSON(cs.expectWorkload()), DumpJSON(workload))
 			}
 			if res := checkErrorEqual(err, cs.err); res != "" {
 				t.Fatal(res)

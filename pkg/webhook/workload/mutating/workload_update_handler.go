@@ -114,7 +114,7 @@ func (h *WorkloadHandler) Handle(ctx context.Context, req admission.Request) adm
 			if !changed {
 				return admission.Allowed("")
 			}
-			marshalled, err := json.Marshal(newObjClone)
+			marshaled, err := json.Marshal(newObjClone)
 			if err != nil {
 				return admission.Errored(http.StatusInternalServerError, err)
 			}
@@ -122,7 +122,7 @@ func (h *WorkloadHandler) Handle(ctx context.Context, req admission.Request) adm
 			if err != nil {
 				return admission.Errored(http.StatusInternalServerError, err)
 			}
-			return admission.PatchResponseFromRaw(original, marshalled)
+			return admission.PatchResponseFromRaw(original, marshaled)
 		case util.ControllerKruiseKindDS.Kind:
 			// check daemonset
 			newObj := &kruiseappsv1alpha1.DaemonSet{}
@@ -143,7 +143,7 @@ func (h *WorkloadHandler) Handle(ctx context.Context, req admission.Request) adm
 			if !changed {
 				return admission.Allowed("")
 			}
-			marshalled, err := json.Marshal(newObjClone)
+			marshaled, err := json.Marshal(newObjClone)
 			if err != nil {
 				return admission.Errored(http.StatusInternalServerError, err)
 			}
@@ -151,7 +151,7 @@ func (h *WorkloadHandler) Handle(ctx context.Context, req admission.Request) adm
 			if err != nil {
 				return admission.Errored(http.StatusInternalServerError, err)
 			}
-			return admission.PatchResponseFromRaw(original, marshalled)
+			return admission.PatchResponseFromRaw(original, marshaled)
 		}
 
 	// native k8s deloyment
@@ -177,7 +177,7 @@ func (h *WorkloadHandler) Handle(ctx context.Context, req admission.Request) adm
 			if !changed {
 				return admission.Allowed("")
 			}
-			marshalled, err := json.Marshal(newObjClone)
+			marshaled, err := json.Marshal(newObjClone)
 			if err != nil {
 				return admission.Errored(http.StatusInternalServerError, err)
 			}
@@ -185,7 +185,7 @@ func (h *WorkloadHandler) Handle(ctx context.Context, req admission.Request) adm
 			if err != nil {
 				return admission.Errored(http.StatusInternalServerError, err)
 			}
-			return admission.PatchResponseFromRaw(original, marshalled)
+			return admission.PatchResponseFromRaw(original, marshaled)
 		}
 	}
 

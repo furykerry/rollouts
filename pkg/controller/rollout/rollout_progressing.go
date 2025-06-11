@@ -157,7 +157,7 @@ func (r *RolloutReconciler) reconcileRolloutProgressing(rollout *v1beta1.Rollout
 			return nil, err
 			// finalizer is finished
 		} else if done {
-			progressingStateTransition(newStatus, corev1.ConditionFalse, v1alpha1.ProgressingReasonCompleted, "Rollout progressing has been cancelled")
+			progressingStateTransition(newStatus, corev1.ConditionFalse, v1alpha1.ProgressingReasonCompleted, "Rollout progressing has been canceled")
 			setRolloutSucceededCondition(newStatus, corev1.ConditionFalse)
 		} else {
 			// Incomplete, recheck
@@ -278,7 +278,7 @@ func (r *RolloutReconciler) handleRollbackDirectly(rollout *v1beta1.Rollout, wor
 	newStatus.SetCanaryRevision(workload.CanaryRevision)
 	r.Recorder.Eventf(rollout, corev1.EventTypeNormal, "Progressing", "workload has been rollback, then rollout is canceled")
 	klog.Infof("rollout(%s/%s) workload has been rollback directly, then rollout canceled", rollout.Namespace, rollout.Name)
-	progressingStateTransition(newStatus, corev1.ConditionTrue, v1alpha1.ProgressingReasonCancelling, "The workload has been rolled back and the rollout process will be cancelled")
+	progressingStateTransition(newStatus, corev1.ConditionTrue, v1alpha1.ProgressingReasonCancelling, "The workload has been rolled back and the rollout process will be canceled")
 	return nil
 }
 

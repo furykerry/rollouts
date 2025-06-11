@@ -112,11 +112,11 @@ func (h *UnifiedWorkloadHandler) Handle(ctx context.Context, req admission.Reque
 		if !changed {
 			return admission.Allowed("")
 		}
-		marshalled, err := json.Marshal(newObj.Object)
+		marshaled, err := json.Marshal(newObj.Object)
 		if err != nil {
 			return admission.Errored(http.StatusInternalServerError, err)
 		}
-		return admission.PatchResponseFromRaw(req.AdmissionRequest.Object.Raw, marshalled)
+		return admission.PatchResponseFromRaw(req.AdmissionRequest.Object.Raw, marshaled)
 	}
 }
 
